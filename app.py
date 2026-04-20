@@ -1,65 +1,69 @@
 import streamlit as st
 
-# Configuración de página: layout 'wide' para aprovechar toda la pantalla
-st.set_page_config(page_title="Hidroeléctrica H2O", layout="wide")
+# Configuración de página
+st.set_page_config(page_title="H2O - Central Futurista", layout="wide")
 
-# Estilos CSS para un look "Tecnológico/Gamer"
+# CSS para el toque FUTURISTA Y LED
 st.markdown("""
     <style>
-    .stApp { background-color: #0a0c10; color: #e0e0e0; }
-    h1 { color: #00ffcc; text-align: center; }
-    h2 { color: #00ffcc; }
-    .stMetric { background-color: #161b22; padding: 20px; border-radius: 10px; border: 1px solid #30363d; }
+    /* Fondo oscuro estilo terminal */
+    .stApp { background-color: #050505; color: #00ffcc; font-family: 'Courier New', monospace; }
+    
+    /* Títulos con brillo LED */
+    h1 { color: #00ffcc; text-shadow: 0 0 10px #00ffcc; text-align: center; }
+    h2 { color: #ff00ff; text-shadow: 0 0 8px #ff00ff; }
+    
+    /* Tarjetas de datos tipo "Panel" */
+    .stMetric { background-color: #111; border: 2px solid #00ffcc; border-radius: 15px; padding: 20px; box-shadow: 0 0 15px #00ffcc33; }
+    
+    /* Pestañas */
+    button { color: #00ffcc !important; }
     </style>
     """, unsafe_allow_html=True)
 
-# Título Principal
-st.title("🌊 Central Hidroeléctrica H2O: Tajo de la Encantada")
+# Título con estilo
+st.title("⚡ SISTEMA CENTRAL H2O - MODO FUTURISTA")
 st.markdown("---")
 
-# Pestañas para organizar la información
-tab_inicio, tab_funcionamiento, tab_datos = st.tabs(["🏗️ Visión General", "🔍 Detalles Técnicos", "📊 Panel de Control"])
+tab_inicio, tab_tecnico, tab_datos = st.tabs(["🚀 INICIO", "⚙️ ESQUEMA TÉCNICO", "🔋 PANEL DE CONTROL"])
 
 with tab_inicio:
-    st.header("Hidroeléctrica del Futuro H2O")
-    # Imagen 1: La que es tipo "nicho" o visión global
-    st.image("nicho.png", caption="Inspirada en la Central del Tajo de la Encantada, Málaga", use_container_width=True)
-    st.write("### Innovación Sostenible para Andalucía")
-    st.info("Un sistema integrado que combina energía fotovoltaica, sensores de infrarrojos y recuperación de energía SREC para maximizar la eficiencia.")
+    st.header("BIENVENIDO AL CENTRO DE OPERACIONES")
+    # Imagen de inicio (Nicho)
+    st.image("Imagen1.png", caption="Visión general de la infraestructura H2O", use_container_width=True)
+    st.write("Estado del Sistema: **ONLINE**")
+    st.info("Central inspirada en la ingeniería del Tajo de la Encantada. Integración total de energías renovables y control digital.")
 
-with tab_funcionamiento:
-    st.header("Esquema Detallado del Proyecto")
-    # Imagen 2: La que tiene todas las etiquetas y flechas
-    st.image("detalle.png", caption="Componentes técnicos del sistema", use_container_width=True)
+with tab_tecnico:
+    st.header("ANÁLISIS DE COMPONENTES")
+    # Imagen detallada
+    st.image("Imagen2.png", caption="Esquema técnico detallado", use_container_width=True)
     
+    # Columnas con iconos
     col1, col2 = st.columns(2)
     with col1:
-        st.subheader("Componentes Clave")
-        st.write("✅ **Embalses:** Superior e Inferior para gestión de bombeo.")
-        st.write("✅ **Conducción:** Tuberías transparentes de alta presión.")
-        st.write("✅ **Generación:** Turbinas de alta eficiencia.")
+        st.subheader("Infraestructura")
+        st.write("🔹 Sensores Infrarrojos: Activos")
+        st.write("🔹 Tubería Transparente: Flujo Óptimo")
     with col2:
-        st.subheader("Control Digital")
-        st.write("✅ **Sensores:** Infrarrojos para monitoreo en tiempo real.")
-        st.write("✅ **APP:** Centro de mando digital desde cualquier dispositivo.")
-        st.write("✅ **SREC:** Sistema de recuperación de energía.")
+        st.subheader("Tecnología SREC")
+        st.write("🔹 Recuperación de energía: Máxima")
+        st.write("🔹 Estabilidad de red: 99.9%")
 
 with tab_datos:
-    st.header("Datos de Producción en Tiempo Real")
+    st.header("MONITOREO DE ENERGÍA")
     c1, c2, c3 = st.columns(3)
-    c1.metric("Potencia Generada", "360 MW", "12%")
-    c2.metric("Nivel Embalse", "85%", "Estable")
-    c3.metric("Turbinas", "4 Activas", "0 Fallos")
+    c1.metric("POTENCIA", "360 MW", "12%")
+    c2.metric("NIVEL EMBALSE", "85%", "Estable")
+    c3.metric("EFICIENCIA", "98%", "Aumentando")
     
-    st.subheader("Tabla de Especificaciones")
     st.table({
-        "Variable": ["Altura de Caída", "Capacidad", "Estado del Sensor"],
-        "Detalle": ["400 metros", "1000 GWh", "OPERATIVO"]
+        "PARÁMETRO": ["Voltaje", "Estado Turbina", "Carga"],
+        "VALOR": ["400kV", "OPERATIVA", "HIGH"]
     })
 
-# Barra lateral para información rápida
-st.sidebar.title("Sobre el Proyecto")
-st.sidebar.write("Proyecto presentado para la Feria de Ciencias.")
-st.sidebar.write("Autor: Parras")
-st.sidebar.success("Estado de conexión: Conectado a la Red")
-
+# Sidebar LED
+st.sidebar.title("🚨 PANEL DE CONTROL")
+st.sidebar.write("Acceso restringido - Autor: Parras")
+if st.sidebar.button("EJECUTAR DIAGNÓSTICO"):
+    st.sidebar.success("SISTEMA SIN ERRORES")
