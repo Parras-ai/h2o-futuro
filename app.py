@@ -1,69 +1,168 @@
 import streamlit as st
 
-# Configuración de página
-st.set_page_config(page_title="H2O - Central Futurista", layout="wide")
+# 1. CONFIGURACIÓN DE PÁGINA: Diseño ancho para tablet
+st.set_page_config(
+    page_title="H2O - Central Futurista v2.0",
+    page_icon="⚡",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
 
-# CSS para el toque FUTURISTA Y LED
+# 2. ESTILOS CSS: El "Toque LED" y Futurista
 st.markdown("""
     <style>
-    /* Fondo oscuro estilo terminal */
-    .stApp { background-color: #050505; color: #00ffcc; font-family: 'Courier New', monospace; }
+    /* Fondo oscuro profundo y texto cian neón */
+    .stApp {
+        background-color: #050505;
+        color: #00ffcc;
+        font-family: 'Courier New', monospace;
+    }
     
-    /* Títulos con brillo LED */
-    h1 { color: #00ffcc; text-shadow: 0 0 10px #00ffcc; text-align: center; }
-    h2 { color: #ff00ff; text-shadow: 0 0 8px #ff00ff; }
+    /* Títulos principales con efecto neón brillante */
+    h1 {
+        color: #00ffcc;
+        text-shadow: 0 0 15px #00ffcc, 0 0 5px #ffffff;
+        text-align: center;
+        padding-bottom: 20px;
+    }
     
-    /* Tarjetas de datos tipo "Panel" */
-    .stMetric { background-color: #111; border: 2px solid #00ffcc; border-radius: 15px; padding: 20px; box-shadow: 0 0 15px #00ffcc33; }
+    /* Subtítulos en fucsia neón */
+    h2, h3 {
+        color: #ff00ff;
+        text-shadow: 0 0 10px #ff00ff;
+        padding-top: 20px;
+    }
     
-    /* Pestañas */
-    button { color: #00ffcc !important; }
+    /* Tarjetas de métricas: Paneles de control */
+    .stMetric {
+        background-color: #111111;
+        border: 2px solid #00ffcc;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    .stMetric:hover {
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        transform: translateY(-5px);
+    }
+    
+    /* Estilo para los textos informativos */
+    .stInfo {
+        background-color: rgba(0, 255, 255, 0.1);
+        color: #ffffff;
+        border-left: 5px solid #00ffcc;
+        border-radius: 5px;
+    }
+
+    /* Estilo para las secciones desplegables */
+    .stSidebar .stMarkdown {
+        color: #ffffff;
+    }
+    
+    /* Ocultar menú de Streamlit para modo presentación */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
 
-# Título con estilo
-st.title("⚡ SISTEMA CENTRAL H2O - MODO FUTURISTA")
+# 3. TÍTULO PRINCIPAL Y CABECERA
+st.title("⚡ SISTEMA CENTRAL HIDROELÉCTRICA H2O")
+st.markdown("<h3 style='text-align: center; color: #ffffff;'>Innovación Sostenible Inspirada en el Tajo de la Encantada</h3>", unsafe_allow_html=True)
 st.markdown("---")
 
-tab_inicio, tab_tecnico, tab_datos = st.tabs(["🚀 INICIO", "⚙️ ESQUEMA TÉCNICO", "🔋 PANEL DE CONTROL"])
+# 4. ESTRUCTURA DE PESTAÑAS (TABS)
+tab_inicio, tab_ingenieria, tab_live = st.tabs(["🚀 INICIO / VISIÓN GENERAL", "⚙️ ESQUEMA TÉCNICO", "📊 MONITORIZACIÓN LIVE"])
 
+# --- PESTAÑA 1: INICIO (Recrea la Imagen 1) ---
 with tab_inicio:
-    st.header("BIENVENIDO AL CENTRO DE OPERACIONES")
-    # Imagen de inicio (Nicho)
-    st.image("Imagen1.png", caption="Visión general de la infraestructura H2O", use_container_width=True)
-    st.write("Estado del Sistema: **ONLINE**")
-    st.info("Central inspirada en la ingeniería del Tajo de la Encantada. Integración total de energías renovables y control digital.")
-
-with tab_tecnico:
-    st.header("ANÁLISIS DE COMPONENTES")
-    # Imagen detallada
-    st.image("Imagen2.png", caption="Esquema técnico detallado", use_container_width=True)
+    st.header("Modo Presentación: Visión Global")
     
-    # Columnas con iconos
-    col1, col2 = st.columns(2)
-    with col1:
-        st.subheader("Infraestructura")
-        st.write("🔹 Sensores Infrarrojos: Activos")
-        st.write("🔹 Tubería Transparente: Flujo Óptimo")
-    with col2:
-        st.subheader("Tecnología SREC")
-        st.write("🔹 Recuperación de energía: Máxima")
-        st.write("🔹 Estabilidad de red: 99.9%")
-
-with tab_datos:
-    st.header("MONITOREO DE ENERGÍA")
-    c1, c2, c3 = st.columns(3)
-    c1.metric("POTENCIA", "360 MW", "12%")
-    c2.metric("NIVEL EMBALSE", "85%", "Estable")
-    c3.metric("EFICIENCIA", "98%", "Aumentando")
+    col_text, col_status = st.columns([2, 1])
     
+    with col_text:
+        st.write("""
+        Esta central representa la **H2O-Futuro**, un prototipo avanzado de gestión energética.
+        Inspirada en la central de bombeo del Tajo de la Encantada (Málaga), nuestro diseño
+        integra tecnologías limpias para crear una **batería natural de alta eficiencia**.
+        
+        Nuestra misión: Transformar la energía hidráulica en una red inteligente y sostenible para Andalucía.
+        """)
+        st.info("💡 **Concepto Clave:** Sistema Hidroeólico con Almacenamiento por Bombeo y Recuperación SREC.")
+    
+    with col_status:
+        st.write("### ESTADO DEL SISTEMA")
+        st.success("🟢 ONLINE - Red Conectada")
+        st.warning("⚠️ Modo Feria Activado")
+
+# --- PESTAÑA 2: INGENIERÍA (Recrea la Imagen 2) ---
+with tab_ingenieria:
+    st.header("Análisis de Componentes y Flujo")
+    st.write("Explora cada elemento del sistema detallado en nuestro esquema original.")
+
+    # Usamos expanders para cada componente detallado
+    with st.expander("💧 EMBALSES (Superior e Inferior)"):
+        st.write("""
+        **Nuestra estructura:** Dos embalses a distintas alturas.
+        - **Embalse Superior (H2O-UP):** Almacena agua en horas de baja demanda.
+        - **Embalse Inferior (H2O-DOWN):** Recoge el agua tras la generación.
+        **Función:** Actúan como una 'batería' de energía potencial.
+        """)
+
+    with st.expander("🆔 SENSORES DE INFRARROJOS (Control de Nivel)"):
+        st.write("""
+        **Tecnología:** Sensores de precisión para monitorear el nivel de agua en tiempo real.
+        **Uso:** Previenen desbordamientos y optimizan los ciclos de bombeo y generación.
+        **Integración:** Conectados directamente a la App de Control.
+        """)
+
+    with st.expander("🚇 TUBERÍA TRANSPARENTE (Conducción Hidráulica)"):
+        st.write("""
+        **Diseño:** Tuberías de alta presión y transparencia para inspección visual y didáctica.
+        **Función:** Transportan el agua entre embalses con mínima pérdida por fricción.
+        """)
+
+    with st.expander("🌀 TURBINAS Y RECUPERADOR (Generación y Bombeo SREC)"):
+        st.write("""
+        **El Corazón de la Central:**
+        - **Turbinas de Alta Eficiencia:** Generan electricidad en horas punta.
+        - **Modo Bombeo SREC:** El mismo sistema actúa como bomba para subir el agua.
+        - **SREC (Recuperación):** Sistema de recuperación de energía excedente para maximizar el rendimiento global.
+        """)
+
+    with st.expander("📱 APP DE CONTROL (Interfaz Digital)"):
+        st.write("""
+        **Centro de Mando:** Interfaz móvil y web para el monitoreo de todos los parámetros: potencia, nivel de agua, estado de turbinas y control de flujo.
+        """)
+
+# --- PESTAÑA 3: MONITORIZACIÓN LIVE (Panel de Datos) ---
+with tab_live:
+    st.header("Panel de Control Energético (SIMULACIÓN)")
+    st.write("Datos técnicos simulados en tiempo real para la presentación.")
+    
+    # Fila de métricas clave (Los "paneles LED")
+    row1_col1, row1_col2, row1_col3 = st.columns(3)
+    row1_col1.metric("POTENCIA ACTUAL", "1.2 GW", "12%", help="Variación respecto a la hora anterior")
+    row1_col2.metric("NIVEL EMBALSE (SUP)", "85%", "Estable", help="Capacidad total de almacenamiento")
+    row1_col3.metric("EFICIENCIA SREC", "98.5%", "Aumentando", help="Rendimiento de la recuperación energética")
+
+    # Tabla detallada (Más info visual)
+    st.subheader("Estado de Componentes")
     st.table({
-        "PARÁMETRO": ["Voltaje", "Estado Turbina", "Carga"],
-        "VALOR": ["400kV", "OPERATIVA", "HIGH"]
+        "Componente": ["Turbina 1", "Turbina 2", "Bomba 1", "Sensor Nivel UP", "Tubería Principal"],
+        "Estado": ["OPERATIVA", "OPERATIVA", "STANDBY", "OPERATIVO", "FLUJO ÓPTIMO"],
+        "Carga": ["100%", "100%", "0%", "N/A", "100%"]
     })
 
-# Sidebar LED
-st.sidebar.title("🚨 PANEL DE CONTROL")
-st.sidebar.write("Acceso restringido - Autor: Parras")
-if st.sidebar.button("EJECUTAR DIAGNÓSTICO"):
-    st.sidebar.success("SISTEMA SIN ERRORES")
+# 5. BARRA LATERAL (Sidebar)
+st.sidebar.title("🚨 PANEL DE CONTROL CENTRAL")
+st.sidebar.markdown("---")
+st.sidebar.write("**Autor:** Parras AI")
+st.sidebar.write("**Proyecto:** Feria de Ciencias 2026")
+st.sidebar.markdown("---")
+st.sidebar.write("**Seguridad:** Acceso Restringido")
+
+# Botón interactivo (funciona seguro)
+if st.sidebar.button("EJECUTAR DIAGNÓSTICO DEL SISTEMA"):
+    st.sidebar.success("✅ Diagnóstico Completado: SISTEMA SIN ERRORES")
