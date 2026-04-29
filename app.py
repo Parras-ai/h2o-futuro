@@ -354,8 +354,7 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("**Autor:** Parras")
-    st.markdown("**Centro:** Colegio Bética-Mudarra")
+    st.markdown("**Autor:** Colegio Bética-Mudarra")
     st.markdown("**Año:** 2025")
     st.markdown("---")
     st.subheader("📱 Acceso Rápido")
