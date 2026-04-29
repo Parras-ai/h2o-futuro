@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# 2. ESTILOS CSS (Diseño Cyberpunk / LED)
+# 2. ESTILOS CSS (Diseño Cyberpunk de Claude)
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
@@ -85,7 +85,7 @@ h2, h3 {
 </style>
 """, unsafe_allow_html=True)
 
-# 3. CABECERA (Título actualizado)
+# 3. CABECERA
 st.title("⚡ Hidroeléctrica FuturH2O")
 st.markdown("""
 <p style='text-align:center;color:#55bbaa;font-family:"Share Tech Mono",monospace;letter-spacing:2px;margin-top:-10px;'>
@@ -112,35 +112,61 @@ with tab_inicio:
 with tab_ingenieria:
     st.header("Análisis de Componentes")
     componentes = [
-        ("💧", "EMBALSES", "Gestión de energía potencial entre niveles superior e inferior."),
-        ("🔴", "SENSORES IR", "Monitorización infrarroja de nivel con precisión milimétrica."),
-        ("🚇", "CONDUCCIÓN", "Tubería transparente de alta presión para inspección de flujo."),
-        ("🌀", "SREC", "Sistema de Recuperación de Energía para máxima eficiencia energética."),
-        ("🖥️", "SCADA", "Interfaz digital de control y monitorización remota.")
+        ("💧", "EMBALSES — Superior e Inferior", "Gestión de energía potencial entre niveles superior e inferior. Capacidad combinada: 320 000 m³."),
+        ("🔴", "SENSORES IR — Control de Nivel", "Monitorización infrarroja de nivel con precisión milimétrica (±2 cm)."),
+        ("🚇", "TUBERÍA TRANSPARENTE — Conducción", "Red de tuberías de alta presión para inspección visual de flujo."),
+        ("🌀", "TECNOLOGÍA SREC — Recuperación", "Sistema de Recuperación de Energía para máxima eficiencia energética en ciclos reversibles."),
+        ("🖥️", "SCADA & APP — Interfaz Digital", "Centro de mando digital para monitorización remota en tiempo real.")
     ]
     for icono, titulo, desc in componentes:
         with st.expander(f"{icono} {titulo}"):
-            st.write(desc)
+            st.markdown(f"<p style='color:#aaffd8;'>{desc}</p>", unsafe_allow_html=True)
 
+# 5. PESTAÑA LIVE (Con el bucle de 2 segundos)
 with tab_live:
     st.header("Panel de Control — Tiempo Real")
     
+    # Contenedor para que solo se actualicen los números
+    live_container = st.empty()
+
     if "prev_potencia" not in st.session_state:
         st.session_state.prev_potencia = 360.0
 
-    potencia = round(random.uniform(348, 372), 1)
-    delta_pot = round(potencia - st.session_state.prev_potencia, 1)
-    st.session_state.prev_potencia = potencia
+    # Bucle infinito para actualizar cada 2 segundos
+    while True:
+        with live_container.container():
+            # Generar datos
+            potencia = round(random.uniform(348, 372), 1)
+            delta_pot = round(potencia - st.session_state.prev_potencia, 1)
+            st.session_state.prev_potencia = potencia
+            
+            eficiencia = round(random.uniform(97.5, 99.5), 2)
+            caudal = round(random.uniform(100, 120), 1)
 
-    c1, c2, c3 = st.columns(3)
-    c1.metric("⚡ POTENCIA GENERADA", f"{potencia} MW", f"{delta_pot:+.1f} MW")
-    c2.metric("📊 EFICIENCIA GLOBAL", f"{random.uniform(97.5, 99.5):.2f} %")
-    c3.metric("🌊 CAUDAL ACTIVO", f"{random.uniform(100, 120):.1f} m³/s")
+            c1, c2, c3 = st.columns(3)
+            c1.metric("⚡ POTENCIA GENERADA", f"{potencia} MW", f"{delta_pot:+.1f} MW")
+            c2.metric("📊 EFICIENCIA GLOBAL", f"{eficiencia} %")
+            c3.metric("🌊 CAUDAL ACTIVO", f"{caudal} m³/s")
 
-    if st.button("⟳ ACTUALIZAR DATOS"):
+            st.markdown("---")
+            st.subheader("Estado de Componentes")
+            
+            # Cards de estado rápidas
+            st.markdown(f"""
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div style="background:#0a1a14; border:1px solid #00ffcc33; padding:10px; border-radius:10px;">
+                    <span class="status-dot"></span> <span style="color:#00ffcc">TURBINA 1: OPERATIVA</span>
+                </div>
+                <div style="background:#0a1a14; border:1px solid #00ffcc33; padding:10px; border-radius:10px;">
+                    <span class="status-dot"></span> <span style="color:#00ffcc">SREC: ACTIVO</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        time.sleep(2) # Aquí está el truco de los 2 segundos
         st.rerun()
 
-# 5. BARRA LATERAL (Sidebar)
+# 6. SIDEBAR
 with st.sidebar:
     st.markdown("<h2 style='text-align:center;'>⚡ H2O-FUTURO</h2>", unsafe_allow_html=True)
     st.markdown("**Autor:** Colegio Bética-Mudarra")
