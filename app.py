@@ -1,6 +1,9 @@
 import streamlit as st
+import time
+import random
+import pandas as pd
 
-# 1. CONFIGURACIÓN DE PÁGINA
+# 1. CONFIGURACIÓN
 st.set_page_config(
     page_title="H2O - Central Hidroeléctrica",
     page_icon="⚡",
@@ -8,100 +11,74 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. ESTILOS CSS: Diseño Futurista LED
+# 2. ESTILOS CSS (Toque Futurista LED)
 st.markdown("""
     <style>
-    .stApp {
-        background-color: #050505;
-        color: #00ffcc;
-        font-family: 'Courier New', monospace;
-    }
-    h1 {
-        color: #00ffcc;
-        text-shadow: 0 0 15px #00ffcc;
-        text-align: center;
-        padding-bottom: 20px;
-    }
-    h2, h3 {
-        color: #ff00ff;
-        text-shadow: 0 0 10px #ff00ff;
-        padding-top: 20px;
-    }
-    .stMetric {
-        background-color: #111111;
-        border: 2px solid #00ffcc;
-        border-radius: 15px;
-        padding: 20px;
-    }
-    .stInfo {
-        background-color: rgba(0, 255, 255, 0.1);
-        color: #ffffff;
-        border-left: 5px solid #00ffcc;
-    }
+    .stApp { background-color: #050505; color: #00ffcc; font-family: 'Courier New', monospace; }
+    h1 { color: #00ffcc; text-shadow: 0 0 15px #00ffcc; text-align: center; }
+    h2, h3 { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
+    .stMetric { background-color: #111111; border: 2px solid #00ffcc; border-radius: 15px; padding: 20px; }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. TÍTULO PRINCIPAL
+# 3. TÍTULO
 st.title("⚡ SISTEMA CENTRAL HIDROELÉCTRICA H2O")
-st.markdown("<h3 style='text-align: center; color: #ffffff;'>Innovación Sostenible Inspirada en el Tajo de la Encantada</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #ffffff;'>Colegio Bética-Mudarra</h3>", unsafe_allow_html=True)
 st.markdown("---")
 
-# 4. ESTRUCTURA DE PESTAÑAS
-tab_inicio, tab_ingenieria, tab_live = st.tabs(["🚀 VISIÓN GENERAL", "⚙️ ESQUEMA TÉCNICO", "📊 MONITORIZACIÓN"])
+# 4. PESTAÑAS
+tab_inicio, tab_ingenieria, tab_live = st.tabs(["🚀 VISIÓN GENERAL", "⚙️ ESQUEMA TÉCNICO", "📊 MONITORIZACIÓN LIVE"])
 
-# --- PESTAÑA 1: INICIO ---
 with tab_inicio:
-    st.header("Visión Global del Proyecto")
-    st.write("""
-    Esta central representa la **H2O-Futuro**, un prototipo avanzado de gestión energética.
-    Inspirada en la central de bombeo del Tajo de la Encantada (Málaga), nuestro diseño
-    integra tecnologías limpias para crear una **batería natural de alta eficiencia**.
-    """)
-    st.info("💡 **Concepto Clave:** Sistema Hidroeólico con Almacenamiento por Bombeo y Recuperación SREC.")
-    st.success("🟢 ESTADO: Red Conectada")
+    st.header("Visión Global")
+    st.write("Prototipo avanzado de gestión energética inspirado en el Tajo de la Encantada.")
+    st.info("💡 Concepto: Almacenamiento por Bombeo y Recuperación SREC.")
 
-# --- PESTAÑA 2: INGENIERÍA ---
 with tab_ingenieria:
     st.header("Análisis de Componentes")
-    
-    with st.expander("💧 EMBALSES (Superior e Inferior)"):
-        st.write("Dos embalses a distintas alturas. El superior almacena agua en horas de baja demanda y el inferior la recoge tras la generación, actuando como una batería de energía potencial.")
+    with st.expander("💧 Embalses y Sensores Infrarrojos"):
+        st.write("Control de energía potencial y monitoreo de niveles en tiempo real.")
+    with st.expander("🌀 Tecnología SREC y Turbinas"):
+        st.write("Sistema de recuperación de energía para maximizar el rendimiento.")
 
-    with st.expander("🆔 SENSORES DE INFRARROJOS (Control de Nivel)"):
-        st.write("Sensores de precisión para monitorear el nivel de agua en tiempo real, previniendo desbordamientos y optimizando los ciclos de bombeo.")
-
-    with st.expander("🚇 TUBERÍA TRANSPARENTE (Conducción Hidráulica)"):
-        st.write("Tuberías de alta presión y transparencia para inspección visual y didáctica, garantizando un transporte con mínima pérdida por fricción.")
-
-    with st.expander("🌀 TURBINAS Y RECUPERADOR (SREC)"):
-        st.write("Sistema de alta eficiencia que genera electricidad en horas punta y permite el bombeo de agua mediante la recuperación de energía excedente (SREC).")
-
-    with st.expander("📱 APP DE CONTROL (Interfaz Digital)"):
-        st.write("Centro de mando digital para el monitoreo de todos los parámetros: potencia, nivel de agua y estado de turbinas.")
-
-# --- PESTAÑA 3: MONITORIZACIÓN ---
 with tab_live:
-    st.header("Panel de Control Energético")
+    st.header("Panel de Control en Tiempo Real")
     
-    col1, col2, col3 = st.columns(3)
-    col1.metric("POTENCIA ACTUAL", "1.2 GW", "12%")
-    col2.metric("NIVEL EMBALSE", "85%", "Estable")
-    col3.metric("EFICIENCIA SREC", "98.5%", "Alta")
-
+    # SOLUCIÓN ERROR 3: Creamos el contenedor vacío
+    metric_placeholder = st.empty()
+    
+    # SOLUCIÓN ERROR 4: Tabla profesional con Dataframe
     st.subheader("Estado de Componentes")
-    st.table({
-        "Componente": ["Turbina 1", "Turbina 2", "Bomba 1", "Sensor Nivel", "Tubería"],
-        "Estado": ["OPERATIVA", "OPERATIVA", "STANDBY", "OPERATIVO", "ÓPTIMO"],
-        "Carga": ["100%", "100%", "0%", "N/A", "100%"]
+    df_estado = pd.DataFrame({
+        "Componente": ["Turbina 1", "Turbina 2", "Bomba SREC", "Sensor Nivel"],
+        "Estado": ["OPERATIVO", "OPERATIVO", "STANDBY", "ACTIVO"],
+        "Carga": ["100%", "100%", "0%", "N/A"]
     })
+    st.dataframe(df_estado, use_container_width=True)
 
-# 5. BARRA LATERAL
+# 5. BARRA LATERAL (Sidebar)
 st.sidebar.title("Información")
 st.sidebar.write("**Autor:** Parras")
 st.sidebar.write("**Centro:** Colegio Bética-Mudarra")
 st.sidebar.markdown("---")
 
-st.sidebar.subheader("📱 Escanea para acceder")
-# Sustituye la URL al final por la dirección real de tu app publicada
-st.sidebar.image("https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://h2o-futuro.streamlit.app")
-st.sidebar.write("Acceso a la documentación oficial.")
+# SOLUCIÓN ERROR 1: URL del QR corregida (sin saltos de línea)
+url_app = "https://h2o-futuro.streamlit.app"
+qr_api = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={url_app}"
+st.sidebar.image(qr_api, caption="Escanea para acceder")
+
+# SOLUCIÓN ERROR 2: Bucle para que los datos sean REALMENTE Live
+# Este bucle actualiza las métricas cada 2 segundos sin recargar el resto de la pestaña
+while True:
+    with metric_placeholder.container():
+        c1, c2, c3 = st.columns(3)
+        # Generamos valores que oscilan ligeramente
+        p = random.uniform(358.5, 362.2)
+        n = random.uniform(84.1, 85.9)
+        e = random.uniform(98.2, 99.1)
+        
+        c1.metric("POTENCIA", f"{p:.2f} MW", f"{random.uniform(-0.5, 0.5):.2f}")
+        c2.metric("NIVEL AGUA", f"{n:.1f} %")
+        c3.metric("EFICIENCIA", f"{e:.2f} %")
+    
+    time.sleep(2) # Pausa de 2 segundos antes de la siguiente actualización
