@@ -42,7 +42,7 @@ with tab_inicio:
     st.info("💡 **Concepto Clave:** Sistema Hidroeólico con Almacenamiento por Bombeo y Recuperación SREC.")
     st.success("🟢 ESTADO DEL SISTEMA: Conectado a la Red")
 
-# --- PESTAÑA 2: ESQUEMA TÉCNICO (TODOS LOS DATOS RECUPERADOS) ---
+# --- PESTAÑA 2: ESQUEMA TÉCNICO ---
 with tab_ingenieria:
     st.header("Análisis Detallado de Componentes")
     st.write("Explora cada elemento técnico que compone el sistema H2O.")
@@ -98,7 +98,7 @@ with tab_live:
 
 # 5. BARRA LATERAL (Sidebar)
 st.sidebar.title("Información")
-st.sidebar.write("**Autor:** Parras")
+st.sidebar.write("**Autor:** Colegio Bética-Mudarra")
 st.sidebar.write("**Centro:** Colegio Bética-Mudarra")
 st.sidebar.markdown("---")
 
@@ -108,11 +108,10 @@ qr_api = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={url_ap
 st.sidebar.subheader("📱 Acceso Móvil")
 st.sidebar.image(qr_api, caption="Escanea para acceder")
 
-# 6. BUCLE DE ACTUALIZACIÓN LIVE (Solo para las métricas)
+# 6. BUCLE DE ACTUALIZACIÓN LIVE
 while True:
     with metric_placeholder.container():
         c1, c2, c3 = st.columns(3)
-        # Datos simulados que oscilan
         potencia = random.uniform(359.2, 361.8)
         nivel = random.uniform(84.5, 85.5)
         eficiencia = random.uniform(98.4, 99.1)
