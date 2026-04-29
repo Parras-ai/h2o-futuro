@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# 2. ESTILOS CSS (Diseño Cyberpunk de Claude)
+# 2. ESTILOS CSS (Diseño Cyberpunk / LED)
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
@@ -122,20 +122,17 @@ with tab_ingenieria:
         with st.expander(f"{icono} {titulo}"):
             st.markdown(f"<p style='color:#aaffd8;'>{desc}</p>", unsafe_allow_html=True)
 
-# 5. PESTAÑA LIVE (Con el bucle de 2 segundos)
 with tab_live:
     st.header("Panel de Control — Tiempo Real")
     
-    # Contenedor para que solo se actualicen los números
     live_container = st.empty()
 
     if "prev_potencia" not in st.session_state:
         st.session_state.prev_potencia = 360.0
 
-    # Bucle infinito para actualizar cada 2 segundos
+    # BUCLE DE ACTUALIZACIÓN AUTOMÁTICA
     while True:
         with live_container.container():
-            # Generar datos
             potencia = round(random.uniform(348, 372), 1)
             delta_pot = round(potencia - st.session_state.prev_potencia, 1)
             st.session_state.prev_potencia = potencia
@@ -150,8 +147,6 @@ with tab_live:
 
             st.markdown("---")
             st.subheader("Estado de Componentes")
-            
-            # Cards de estado rápidas
             st.markdown(f"""
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div style="background:#0a1a14; border:1px solid #00ffcc33; padding:10px; border-radius:10px;">
@@ -163,15 +158,19 @@ with tab_live:
             </div>
             """, unsafe_allow_html=True)
 
-        time.sleep(2) # Aquí está el truco de los 2 segundos
+        time.sleep(2)
         st.rerun()
 
-# 6. SIDEBAR
+# 5. BARRA LATERAL (CON EL QR RESTAURADO)
 with st.sidebar:
     st.markdown("<h2 style='text-align:center;'>⚡ H2O-FUTURO</h2>", unsafe_allow_html=True)
     st.markdown("**Autor:** Colegio Bética-Mudarra")
     st.markdown("**Centro:** Colegio Bética-Mudarra")
     st.markdown("---")
     st.subheader("📱 Acceso Rápido")
-    st.image("https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://h2o-futuro.streamlit.app")
+    # EL QR ESTÁ AQUÍ:
+    st.image("https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://h2o-futuro.streamlit.app", 
+             caption="Escanea para acceder", 
+             use_container_width=True)
+    st.markdown("---")
     st.caption("Sistema FuturH2O v2.0 · Colegio Bética-Mudarra")
