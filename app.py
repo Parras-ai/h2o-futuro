@@ -85,7 +85,24 @@ h2, h3 {
 </style>
 """, unsafe_allow_html=True)
 
-# 3. CABECERA
+# ─────────────────────────────────────────────
+# 3. BARRA LATERAL (SIDEBAR) - CARGADA AL INICIO
+# ─────────────────────────────────────────────
+with st.sidebar:
+    st.markdown("<h2 style='text-align:center;'>⚡ H2O-FUTURO</h2>", unsafe_allow_html=True)
+    st.markdown("**Autor:** Colegio Bética-Mudarra")
+    st.markdown("**Centro:** Colegio Bética-Mudarra")
+    st.markdown("---")
+    st.subheader("📱 Acceso Rápido")
+    st.image("https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://h2o-futuro.streamlit.app", 
+             caption="Escanea para acceder", 
+             use_container_width=True)
+    st.markdown("---")
+    st.caption("Sistema FuturH2O v2.0 · Colegio Bética-Mudarra")
+
+# ─────────────────────────────────────────────
+# 4. CUERPO PRINCIPAL
+# ─────────────────────────────────────────────
 st.title("⚡ Hidroeléctrica FuturH2O")
 st.markdown("""
 <p style='text-align:center;color:#55bbaa;font-family:"Share Tech Mono",monospace;letter-spacing:2px;margin-top:-10px;'>
@@ -94,7 +111,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.markdown("---")
 
-# 4. PESTAÑAS
 tab_inicio, tab_ingenieria, tab_live = st.tabs([
     "🚀  VISIÓN GENERAL", "⚙️  ESQUEMA TÉCNICO", "📊  MONITORIZACIÓN LIVE"
 ])
@@ -112,11 +128,11 @@ with tab_inicio:
 with tab_ingenieria:
     st.header("Análisis de Componentes")
     componentes = [
-        ("💧", "EMBALSES — Superior e Inferior", "Gestión de energía potencial entre niveles superior e inferior. Capacidad combinada: 320 000 m³."),
+        ("💧", "EMBALSES — Superior e Inferior", "Gestión de energía potencial entre niveles superior e inferior."),
         ("🔴", "SENSORES IR — Control de Nivel", "Monitorización infrarroja de nivel con precisión milimétrica (±2 cm)."),
         ("🚇", "TUBERÍA TRANSPARENTE — Conducción", "Red de tuberías de alta presión para inspección visual de flujo."),
-        ("🌀", "TECNOLOGÍA SREC — Recuperación", "Sistema de Recuperación de Energía para máxima eficiencia energética en ciclos reversibles."),
-        ("🖥️", "SCADA & APP — Interfaz Digital", "Centro de mando digital para monitorización remota en tiempo real.")
+        ("🌀", "TECNOLOGÍA SREC — Recuperación", "Sistema de Recuperación de Energía para máxima eficiencia energética."),
+        ("🖥️", "SCADA & APP — Interfaz Digital", "Centro de mando digital para monitorización remota.")
     ]
     for icono, titulo, desc in componentes:
         with st.expander(f"{icono} {titulo}"):
@@ -130,7 +146,7 @@ with tab_live:
     if "prev_potencia" not in st.session_state:
         st.session_state.prev_potencia = 360.0
 
-    # BUCLE DE ACTUALIZACIÓN AUTOMÁTICA
+    # Bucle de actualización cada 2 segundos
     while True:
         with live_container.container():
             potencia = round(random.uniform(348, 372), 1)
@@ -160,17 +176,3 @@ with tab_live:
 
         time.sleep(2)
         st.rerun()
-
-# 5. BARRA LATERAL (CON EL QR RESTAURADO)
-with st.sidebar:
-    st.markdown("<h2 style='text-align:center;'>⚡ H2O-FUTURO</h2>", unsafe_allow_html=True)
-    st.markdown("**Autor:** Colegio Bética-Mudarra")
-    st.markdown("**Centro:** Colegio Bética-Mudarra")
-    st.markdown("---")
-    st.subheader("📱 Acceso Rápido")
-    # EL QR ESTÁ AQUÍ:
-    st.image("https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://h2o-futuro.streamlit.app", 
-             caption="Escanea para acceder", 
-             use_container_width=True)
-    st.markdown("---")
-    st.caption("Sistema FuturH2O v2.0 · Colegio Bética-Mudarra")
